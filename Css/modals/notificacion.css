@@ -1,76 +1,104 @@
-/* --- PARTE 1: BASE MODAL (CORREGIDA PARA POSICIÓN DEBAJO DEL ICONO) --- */
+/* --- BASE MODAL (POSICIÓN) --- */
 .modal-notificaciones {
     display: none; /* Oculto por defecto */
-    position: absolute; /* Cambiado de fixed a absolute */
+    position: absolute; 
     z-index: 1000;
     top: 80px; /* Ajusta según altura del icono */
     right: 60px; /* Ajusta para alinearlo al icono */
-    background: transparent; /* Sin fondo oscuro */
+    background: transparent;
 }
 
-/* --- PARTE 2: CAJA DE CONTENIDO --- */
+/* --- CAJA DE CONTENIDO --- */
 .modal-content-notificaciones {
     background-color: #1a1a1a;
-    padding: 40px;
-    border: 1px solid #d4af37;
-    width: 320px; /* Más realista para notificaciones */
+    padding: 30px;
+    border: 1px solid #333; /* Borde sutil */
+    width: 340px; /* Ancho ajustado al diseño */
     color: white;
-    text-align: left;
     font-family: 'Montserrat', sans-serif;
     box-shadow: 0 8px 20px rgba(0,0,0,0.6);
     border-radius: 8px;
     position: relative;
 }
 
-/* --- BOTÓN DE CIERRE --- */
+/* --- BOTÓN DE CIERRE (X) --- */
 .close-btn-notif {
     color: white;
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     cursor: pointer;
+    transition: color 0.2s ease;
 }
-.close-btn:hover { color: #d4af37; }
+.close-btn-notif:hover { 
+    color: #aaa; 
+}
 
-/* --- TÍTULO Y CAMPOS --- */
+/* --- TÍTULO --- */
 .modal-content-notificaciones h2 {
-    margin-bottom: 25px;
+    margin-top: 0;
+    margin-bottom: 30px; /* Más espacio */
     font-weight: 600;
     letter-spacing: 1px;
     color: white;
     text-align: left;
+    font-size: 1.5rem; /* Más grande */
+    text-transform: uppercase; /* Como en la imagen */
 }
 
-.input-group {
-    margin-bottom: 20px;
+/* --- Opciones de Notificación (Botones grises) --- */
+.notification-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre botones */
+    margin-bottom: 30px;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 12px;
+.notification-option-btn {
+    background-color: #e0e0e0; /* Gris claro como en la imagen */
+    color: #222; /* Texto oscuro */
     border: none;
-    background-color: #e6e6e6;
-    color: #333;
-    border-radius: 6px;
-    box-sizing: border-box;
-}
-
-/* --- BOTÓN --- */
-.btn-submit {
-    width: 100%;
-    padding: 12px;
-    background-color: #d4af37;
-    color: #1a1a1a;
-    border: none;
-    border-radius: 6px;
+    border-radius: 12px; /* Redondeado */
+    padding: 18px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
     cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.btn-submit:hover {
-    background-color: #b9962e;
+.notification-option-btn:hover {
+    background-color: #f0f0f0; /* Más claro al pasar el ratón */
+    transform: scale(1.02);
+}
+
+/* Estilo para cuando se selecciona (puedes activarlo con JS) */
+.notification-option-btn.selected { 
+    outline: 2px solid #d4af37;
+    background-color: #f5f5f5;
+}
+
+
+/* --- Footer del Modal ("Seleccionar") --- */
+.notification-footer {
+    text-align: right; /* Alinea el botón a la derecha */
+}
+
+.btn-select {
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px;
+    transition: color 0.2s ease;
+}
+
+.btn-select:hover {
+    color: #d4af37; /* Color dorado al pasar el ratón */
 }

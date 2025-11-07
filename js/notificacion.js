@@ -5,29 +5,33 @@ function initNotificacionesModal() {
 
     if (!modal || !bellIcon) return; // seguridad
 
-    const closeBtn = modal.querySelector('.close-btn');
+    // CORREGIDO: El botón de cierre tiene la clase .close-btn-notif
+    const closeBtn = modal.querySelector('.close-btn-notif'); 
 
     // Mostrar modal al hacer clic en la campana
     bellIcon.addEventListener('click', (e) => {
         e.stopPropagation(); // evita que se cierre inmediatamente
-        // Alternar visibilidad
+        
         if (modal.style.display === 'block') {
             modal.style.display = 'none';
         } else {
             modal.style.display = 'block';
-            loadNotificaciones();
+            // Llamamos a la función (ahora vacía) por si en el futuro
+            // quieres añadir lógica aquí (ej. mostrar puntos rojos)
+            loadNotificaciones(); 
         }
     });
 
     // Cerrar con el botón "X"
-    closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        modal.style.display = 'none';
-    });
+    if (closeBtn) { // Añadimos un 'if' por seguridad
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            modal.style.display = 'none';
+        });
+    }
 
     // Cerrar al hacer clic fuera del contenido del modal
     document.addEventListener('click', (e) => {
-        // Si hace clic fuera del modal y fuera del icono de la campana
         if (
             modal.style.display === 'block' &&
             !modal.contains(e.target) &&
@@ -63,8 +67,9 @@ function loadModalNotificaciones() {
         .then((res) => res.text())
         .then((html) => {
             const placeholder = document.getElementById('modal-placeholder');
-            placeholder.innerHTML = html;
-            initNotificacionesModal();
+            // Usamos += para no sobreescribir otros modales
+            placeholder.innerHTML += html; 
+            initNotificacionesModal(); // Esto inicializa los listeners
         })
         .catch((err) =>
             console.error('Error cargando notificaciones:', err)
@@ -72,23 +77,13 @@ function loadModalNotificaciones() {
 }
 
 // --- Cargar contenido del modal al inicio ---
-document.addEventListener('DOMContentLoaded', loadModalNotificaciones);
+// Asegúrate de que esto se llame desde tu script principal
+// document.addEventListener('DOMContentLoaded', loadModalNotificaciones);
 
-// --- Función para llenar la lista de notificaciones ---
+// --- Función para llenar la lista de notificaciones (MODIFICADA) ---
 function loadNotificaciones() {
-    const lista = document.getElementById('notificaciones-list');
-    if (!lista) return; // evita errores si aún no existe
-
-    lista.innerHTML = '';
-    const notis = [
-        'Tienes un nuevo mensaje.',
-        'Tu cita ha sido confirmada.',
-        'Promoción disponible esta semana.',
-    ];
-
-    notis.forEach((noti) => {
-        const li = document.createElement('li');
-        li.textContent = noti;
-        lista.appendChild(li);
-    });
+    // El contenido ahora es ESTÁTICO en el HTML.
+    // Esta función ya no necesita añadir 'li' elements.
+    // Se puede dejar vacía o usarse en el futuro.
+    console.log("Modal de notificaciones abierto.");
 }
