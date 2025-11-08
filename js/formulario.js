@@ -1,52 +1,55 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // --- LÓGICA DE VALIDACIÓN DEL FORMULARIO DE DATOS ---
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('pre-cita-form');
+    const inputAlergias = document.getElementById('pregunta-alergias');
+    const inputCondiciones = document.getElementById('pregunta-condiciones');
+    const errorAlergias = document.getElementById('error-alergias');
+    const errorCondiciones = document.getElementById('error-condiciones');
 
-    const appointmentForm = document.getElementById('appointment-data-form');
-
-    if (appointmentForm) {
-        appointmentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            let isValid = true;
-            
-            // Seleccionar todos los campos requeridos
-            const requiredInputs = appointmentForm.querySelectorAll('input[required]');
-
-            requiredInputs.forEach(input => {
-                const formGroup = input.closest('.form-group');
-                const errorMessage = formGroup.querySelector('.error-message');
-
-                if (input.value.trim() === '') {
-                    // Muestra el error
-                    formGroup.classList.add('error');
-                    if (errorMessage) errorMessage.classList.remove('hidden');
-                    isValid = false;
-                } else {
-                    // Remueve el error si el campo es válido
-                    formGroup.classList.remove('error');
-                    if (errorMessage) errorMessage.classList.add('hidden');
-                }
-            });
-
-            if (isValid) {
-                // Si todos los campos son válidos:
-                alert('¡Datos de cita completados! Enviando al servidor. ¡Gracias por agendar!');
-                console.log('Formulario válido. Datos listos para ser procesados.');
-                // Aquí iría la lógica para enviar los datos (fetch/AJAX)
-                // appointmentForm.reset();
-            } else {
-                console.log('Formulario inválido. Errores mostrados al usuario.');
-            }
-        });
-        
-        // Lógica para el botón Cancelar
-        const btnCancel = appointmentForm.querySelector('.btn-cancel');
-        btnCancel.addEventListener('click', () => {
-            alert('Formulario cancelado. Redirigiendo a la vista anterior.');
-            window.history.back();
-        });
+    // Función para validar un campo específico
+    function validateField(inputElement, errorElement, message) {
+        const value = inputElement.value.trim(); // .trim() elimina espacios en blanco al inicio y final
+        if (value === '') {
+            errorElement.textContent = message; // Establece el mensaje de error
+            errorElement.style.display = 'block'; // Muestra el mensaje de error
+            inputElement.closest('.form-group').classList.add('error'); // Añade clase de error al grupo
+            return false;
+        } else {
+            errorElement.style.display = 'none'; // Oculta el mensaje de error
+            inputElement.closest('.form-group').classList.remove('error'); // Quita clase de error
+            return true;
+        }
     }
 
-    // --- Asegúrate de que tu lógica de navegación y menú persista ---
-    // (Tu código JS existente para undoButton, reloadButton, categoriasLink, etc., debe estar en este mismo archivo).
+    // Escuchar el evento submit del formulario
+    form.addEventListener('submit', function(event) {
+        let formIsValid = true;
+
+        // Validar cada campo
+        const isAlergiasValid = validateField(inputAlergias, errorAlergias, 'No se puede dejar el campo vacío.');
+        const isCondicionesValid = validateField(inputCondiciones, errorCondiciones, 'No se puede dejar el campo vacío.');
+
+        // Si algún campo no es válido, el formulario no es válido
+        if (!isAlergiasValid || !isCondicionesValid) {
+            formIsValid = false;
+        }
+
+        if (!formIsValid) {
+            event.preventDefault(); // Detener el envío del formulario si hay errores
+        } else {
+            // Aquí puedes añadir la lógica para enviar el formulario (ej. AJAX)
+            alert('Formulario enviado con éxito (¡en un escenario real, iría a un servidor!)');
+            // Por ahora, para la demo, también evitamos el envío real
+            event.preventDefault(); 
+        }
+    });
+
+    // Opcional: Validar en tiempo real cuando el usuario escribe (o cuando pierde el foco)
+    inputAlergias.addEventListener('input', function() {
+        validateField(inputAlergias, errorAlergias, 'No se puede dejar el campo vacío.');
+    });
+
+    inputCondiciones.addEventListener('input', function() {
+        validateField(inputCondiciones, errorCondiciones, 'No se puede dejar el campo vacío.');
+    });
 
 });

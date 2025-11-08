@@ -18,6 +18,20 @@
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+/* Estilo para los mensajes de error, similar a la imagen */
+/* Estilos para los mensajes de error */
+.error-message {
+    color: red; /* Color rojo para el texto del error */
+    font-size: 0.85em; /* Un tamaño de fuente un poco más pequeño */
+    margin-top: 5px; /* Pequeño margen superior */
+    display: none; /* Oculto por defecto */
+}
+
+/* Opcional: Para resaltar el borde del input cuando hay un error */
+.form-group.error input {
+    border-color: red;
+}
+
 /* Estilo para mostrar el modal */
 .modal-overlay.visible {
     opacity: 1;

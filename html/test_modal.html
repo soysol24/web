@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Modal</title>
+    <style>
+        /* Estilos de prueba para el modal */
+        #modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+        }
+
+        #modal-overlay.show {
+            display: block;
+        }
+
+        #success-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            max-width: 400px;
+            width: 90%;
+            padding: 2rem;
+            text-align: center;
+            display: none;
+        }
+
+        #success-modal.show {
+            display: block;
+        }
+
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-icon svg {
+            width: 35px;
+            height: 35px;
+            color: white;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .modal-message {
+            font-size: 1rem;
+            color: #6b7280;
+            margin: 0 0 1.5rem 0;
+            line-height: 1.5;
+        }
+
+        .modal-button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .test-button {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 1rem 2rem;
+            background: #f00;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BOTÓN DE PRUEBA -->
+    <button class="test-button" onclick="testModal()">🔴 PRUEBA MODAL</button>
+
+    <!-- Overlay del Modal -->
+    <div id="modal-overlay"></div>
+
+    <!-- Modal de Éxito -->
+    <div id="success-modal">
+        <div class="modal-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+        </div>
+        <h2 class="modal-title">¡Perfil Actualizado!</h2>
+        <p class="modal-message">Tus cambios han sido guardados exitosamente.</p>
+        <button class="modal-button" onclick="closeTestModal()">Aceptar</button>
+    </div>
+
+    <script>
+        function testModal() {
+            console.log('ABRIENDO MODAL DE PRUEBA');
+            const modal = document.getElementById('success-modal');
+            const overlay = document.getElementById('modal-overlay');
+            
+            modal.classList.add('show');
+            overlay.classList.add('show');
+            
+            console.log('Modal classes:', modal.className);
+            console.log('Overlay classes:', overlay.className);
+        }
+
+        function closeTestModal() {
+            document.getElementById('success-modal').classList.remove('show');
+            document.getElementById('modal-overlay').classList.remove('show');
+        }
+
+        document.getElementById('modal-overlay').addEventListener('click', closeTestModal);
+    </script>
+
+</body>
+</html>

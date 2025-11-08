@@ -126,9 +126,11 @@ main {
 }
 
 /* HERO */
+/* HERO - Imagen estática sin animaciones */
 .hero-section {
     position: relative;
     margin-bottom: 60px;
+    overflow: hidden;
 }
 
 .hero-image {
@@ -136,6 +138,16 @@ main {
     height: 600px;
     object-fit: cover;
     border-radius: 2px;
+    /* Eliminamos cualquier transición o transform */
+    transition: none;
+    transform: none;
+}
+
+/* Aseguramos que NO haya hover ni animaciones */
+.hero-section:hover .hero-image,
+.hero-image:hover {
+    transform: none;
+    scale: 1;
 }
 
 .hero-overlay {
