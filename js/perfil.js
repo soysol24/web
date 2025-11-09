@@ -1,19 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('=== PERFIL.JS INICIADO ===');
 
-    // Cargar header/footer
-    if (typeof loadHeaderFooter === 'function') {
-        loadHeaderFooter();
-    }
+
 
     // ========================================
     // REFERENCIAS A ELEMENTOS
     // ========================================
-    
+
     // Vistas
     const viewProfileSection = document.getElementById('view-profile-section');
     const editProfileSection = document.getElementById('edit-profile-section');
-    
+
     // Botones principales
     const editButton = document.getElementById('btn-edit');
     const cancelButton = document.getElementById('btn-cancel');
@@ -24,16 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewPassInput = document.getElementById('view-pass');
 
     // Inputs de edición
+    const editUsernameInput = document.getElementById('edit-username');
     const editEmailInput = document.getElementById('edit-email');
     const editEmailConfirmInput = document.getElementById('edit-email-confirm');
     const editPassInput = document.getElementById('edit-pass');
     const editPassConfirmInput = document.getElementById('edit-pass-confirm');
+    const editPhoneInput = document.getElementById('edit-phone');
+
 
     // Mensajes de error
+    const errorUsername = document.getElementById('error-username');
     const errorEmail = document.getElementById('error-email');
     const errorEmailConfirm = document.getElementById('error-email-confirm');
     const errorPass = document.getElementById('error-pass');
     const errorPassConfirm = document.getElementById('error-pass-confirm');
+    const errorPhone = document.getElementById('error-phone');
+   
 
     // Modal de confirmación
     const modalOverlay = document.getElementById('profile-modal-overlay');
@@ -47,10 +50,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const successCloseBtn = document.getElementById('profile-close-modal');
 
     // Arrays para iteración
-    const inputs = [editEmailInput, editEmailConfirmInput, editPassInput, editPassConfirmInput];
-    const errorMessages = [errorEmail, errorEmailConfirm, errorPass, errorPassConfirm];
+    const inputs = [
+        editUsernameInput,
+        editEmailInput,
+        editEmailConfirmInput,
+        editPassInput,
+        editPassConfirmInput,
+        editPhoneInput,
+        
+    ];
 
-    // Validar elementos críticos
+    const errorMessages = [
+        errorUsername,
+        errorEmail,
+        errorEmailConfirm,
+        errorPass,
+        errorPassConfirm,
+        errorPhone,
+        
+    ];
+
     if (!viewProfileSection || !editProfileSection || !editButton || !saveButton) {
         console.error('❌ Faltan elementos críticos en el DOM');
         return;
@@ -62,16 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // FUNCIONES DE VALIDACIÓN
     // ========================================
 
-    function showError(inputElement, errorElement, message) {
+    function showError(input, errorElement, message) {
         errorElement.textContent = message;
         errorElement.style.display = 'block';
-        inputElement.closest('.profile-form-group').classList.add('error');
+        input.closest('.profile-form-group').classList.add('error');
     }
 
-    function clearError(inputElement, errorElement) {
+    function clearError(input, errorElement) {
         errorElement.textContent = '';
         errorElement.style.display = 'none';
-        inputElement.closest('.profile-form-group').classList.remove('error');
+        input.closest('.profile-form-group').classList.remove('error');
     }
 
     function clearAllErrors() {
@@ -82,12 +101,24 @@ document.addEventListener('DOMContentLoaded', () => {
         let isValid = true;
         clearAllErrors();
 
+        const username = editUsernameInput.value.trim();
         const email = editEmailInput.value.trim();
         const emailConfirm = editEmailConfirmInput.value.trim();
         const pass = editPassInput.value.trim();
         const passConfirm = editPassConfirmInput.value.trim();
-
+        const phone = editPhoneInput.value.trim();
+      
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[0-9]{8,}$/; // al menos 8 dígitos
+
+        // Validar usuario
+        if (username === '') {
+            showError(editUsernameInput, errorUsername, 'El nombre de usuario no puede estar vacío.');
+            isValid = false;
+        } else if (username.length < 3) {
+            showError(editUsernameInput, errorUsername, 'Debe tener al menos 3 caracteres.');
+            isValid = false;
+        }
 
         // Validar email
         if (email === '') {
@@ -98,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         }
 
-        // Validar confirmación de email
+        // Confirmar email
         if (emailConfirm === '') {
             showError(editEmailConfirmInput, errorEmailConfirm, 'Confirma tu email.');
             isValid = false;
@@ -116,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         }
 
-        // Validar confirmación de contraseña
+        // Confirmar contraseña
         if (passConfirm === '') {
             showError(editPassConfirmInput, errorPassConfirm, 'Confirma tu contraseña.');
             isValid = false;
@@ -125,165 +156,128 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         }
 
+        // Validar teléfono
+        if (phone === '') {
+            showError(editPhoneInput, errorPhone, 'El número de teléfono no puede estar vacío.');
+            isValid = false;
+        } else if (!phoneRegex.test(phone)) {
+            showError(editPhoneInput, errorPhone, 'Introduce un número de teléfono válido (solo dígitos).');
+            isValid = false;
+        }
+
+        // Confirmar teléfono
+       
+
         return isValid;
     }
 
     // ========================================
-    // FUNCIONES DE MODALES
+    // MODALES
     // ========================================
 
     function openConfirmModal() {
-        console.log('📋 Abriendo modal de confirmación');
         modalOverlay.classList.add('show');
         confirmModal.classList.add('show');
         document.body.style.overflow = 'hidden';
     }
 
     function closeConfirmModal() {
-        console.log('❌ Cerrando modal de confirmación');
         modalOverlay.classList.remove('show');
         confirmModal.classList.remove('show');
         document.body.style.overflow = '';
     }
 
     function openSuccessModal() {
-        console.log('✅ Abriendo modal de éxito');
         modalOverlay.classList.add('show');
         successModal.classList.add('show');
         document.body.style.overflow = 'hidden';
     }
 
     function closeSuccessModal() {
-        console.log('❌ Cerrando modal de éxito');
         modalOverlay.classList.remove('show');
         successModal.classList.remove('show');
         document.body.style.overflow = '';
     }
 
     // ========================================
-    // FUNCIONES DE VISTAS
+    // VISTAS
     // ========================================
 
     function showEditView() {
-        console.log('✏️ Cambiando a vista de edición');
         clearAllErrors();
-        
-        // Pre-cargar valores actuales
+        editUsernameInput.value = 'Usuario anterior';
         editEmailInput.value = viewEmailInput.value;
         editEmailConfirmInput.value = '';
         editPassInput.value = '';
         editPassConfirmInput.value = '';
-        
+        editPhoneInput.value = '';
+      
         viewProfileSection.classList.add('hidden');
         editProfileSection.classList.remove('hidden');
     }
 
     function showProfileView() {
-        console.log('👁️ Cambiando a vista de perfil');
         clearAllErrors();
         editProfileSection.classList.add('hidden');
         viewProfileSection.classList.remove('hidden');
     }
 
     // ========================================
-    // FUNCIÓN DE GUARDADO
+    // GUARDADO
     // ========================================
 
     function saveProfileChanges() {
         console.log('💾 Guardando cambios...');
-        
+        const newUsername = editUsernameInput.value.trim();
         const newEmail = editEmailInput.value.trim();
         const newPass = editPassInput.value.trim();
+        const newPhone = editPhoneInput.value.trim();
 
-        // AQUÍ VA TU LÓGICA DE GUARDADO REAL
-        // Ejemplo con fetch:
-        /*
-        fetch('/api/update-profile', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: newEmail, password: newPass })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Actualizar vista
-                viewEmailInput.value = newEmail;
-                openSuccessModal();
-            }
-        })
-        .catch(error => console.error('Error:', error));
-        */
-
-        // Simulación de guardado (REEMPLAZA ESTO CON TU BACKEND)
+        // Simulación (aquí iría fetch o API call)
         setTimeout(() => {
-            // Actualizar campos de vista
             viewEmailInput.value = newEmail;
-            // La contraseña se mantiene oculta como "**********"
-            
-            console.log('✅ Datos guardados exitosamente');
+            console.log('✅ Datos guardados:', {
+                usuario: newUsername,
+                email: newEmail,
+                contraseña: newPass.replace(/./g, '*'),
+                teléfono: newPhone
+            });
             openSuccessModal();
-        }, 500);
+        }, 600);
     }
 
     // ========================================
-    // EVENT LISTENERS
+    // EVENTOS
     // ========================================
 
-    // Botón "Editar"
     editButton.addEventListener('click', showEditView);
-
-    // Botón "Cancelar"
     cancelButton.addEventListener('click', showProfileView);
 
-    // Botón "Guardar" - Abre modal de confirmación
     saveButton.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log('💾 Botón Guardar presionado');
-        
         if (validateForm()) {
             openConfirmModal();
-        } else {
-            console.log('❌ Formulario con errores');
         }
     });
 
-    // Modal de Confirmación - Botón "X"
-    if (modalCloseX) {
-        modalCloseX.addEventListener('click', closeConfirmModal);
-    }
+    modalCloseX?.addEventListener('click', closeConfirmModal);
+    modalCancelBtn?.addEventListener('click', closeConfirmModal);
+    modalConfirmBtn?.addEventListener('click', () => {
+        closeConfirmModal();
+        saveProfileChanges();
+    });
+    successCloseBtn?.addEventListener('click', () => {
+        closeSuccessModal();
+        showProfileView();
+    });
 
-    // Modal de Confirmación - Botón "Cancelar"
-    if (modalCancelBtn) {
-        modalCancelBtn.addEventListener('click', closeConfirmModal);
-    }
-
-    // Modal de Confirmación - Botón "Guardar"
-    if (modalConfirmBtn) {
-        modalConfirmBtn.addEventListener('click', () => {
+    modalOverlay?.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
             closeConfirmModal();
-            saveProfileChanges();
-        });
-    }
-
-    // Modal de Éxito - Botón "Aceptar"
-    if (successCloseBtn) {
-        successCloseBtn.addEventListener('click', () => {
             closeSuccessModal();
-            showProfileView();
-        });
-    }
+        }
+    });
 
-    // Cerrar modal al hacer clic en overlay
-    if (modalOverlay) {
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                closeConfirmModal();
-                closeSuccessModal();
-            }
-        });
-    }
-
-    // Cerrar modales con tecla ESC
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeConfirmModal();
@@ -292,10 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Limpiar errores mientras se escribe
-    inputs.forEach((input, index) => {
-        input.addEventListener('input', () => {
-            clearError(input, errorMessages[index]);
-        });
+    inputs.forEach((input, i) => {
+        input.addEventListener('input', () => clearError(input, errorMessages[i]));
     });
 
     console.log('=== PERFIL.JS LISTO ===');

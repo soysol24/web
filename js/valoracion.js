@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         const modalHTML = await response.text();
         // Se inyecta en el placeholder
-        document.getElementById('modal-placeholder').innerHTML = modalHTML;
+        document.getElementById('modal-placeholder-valor').innerHTML = modalHTML;
 
     } catch (error) {
         console.error('Error fatal al cargar modal:', error);

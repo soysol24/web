@@ -28,7 +28,6 @@ function closeCancelModal() {
 }
 
 // --- FUNCIONES DEL MODAL DE ERROR ---
-// (Estas funciones no cambian, siguen siendo correctas)
 
 function openErrorModal(message) {
     const errorModal = document.getElementById('error-modal');
@@ -38,9 +37,8 @@ function openErrorModal(message) {
         errorMessageElement.textContent = message;
         errorModal.classList.add('visible');
     } else {
-        // Fallback por si el modal aún no carga
         console.error("El modal de error no se encontró en el DOM.");
-        alert(message); // Muestra un alert como último recurso
+        alert(message);
     }
 }
 
@@ -51,12 +49,41 @@ function closeErrorModal() {
     }
 }
 
+// --- FUNCIONES DEL MODAL DE ÉXITO ---
+
+function openSuccessModal() {
+    const successModal = document.getElementById('success-modal');
+    if (successModal) {
+        successModal.classList.add('visible');
+    }
+}
+
+function closeSuccessModal() {
+    const successModal = document.getElementById('success-modal');
+    if (successModal) {
+        successModal.classList.remove('visible');
+    }
+}
+
+// --- FUNCIONES DEL MODAL DE RECHAZO ---
+
+function openRejectModal() {
+    const rejectModal = document.getElementById('reject-modal');
+    if (rejectModal) {
+        rejectModal.classList.add('visible');
+    }
+}
+
+function closeRejectModal() {
+    const rejectModal = document.getElementById('reject-modal');
+    if (rejectModal) {
+        rejectModal.classList.remove('visible');
+    }
+}
 
 // --- FUNCIONES PRINCIPALES ---
 
-// Función para generar el calendario
 function generateCalendar(month, year) {
-    // ... (Tu código de generateCalendar no cambia) ...
     const calendarGrid = document.querySelector('.calendar-grid');
     const monthDisplay = document.getElementById('currentMonth');
     
@@ -105,9 +132,7 @@ function generateCalendar(month, year) {
     }
 }
 
-// Actualizar disponibilidad de horarios
 function updateTimeSlots() {
-    // ... (Tu código de updateTimeSlots no cambia) ...
     if (!selectedDate) return;
     
     const timeSlots = document.querySelectorAll('.time-slot');
@@ -152,9 +177,7 @@ function updateTimeSlots() {
     }
 }
 
-// Función para resetear toda la selección
 function resetSelections() {
-    // ... (Tu código de resetSelections no cambia) ...
     selectedDate = null;
     selectedTime = null;
     selectedStylist = null;
@@ -177,29 +200,21 @@ function resetSelections() {
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Cargar los modales dinámicamente
     cargarModalCancelacion();
     cargarYConfigurarModal();
-    cargarErrorModal(); // <-- // NUEVO: Llamamos a la función para cargar el modal de error
+    cargarErrorModal();
+    cargarSuccessModal();  // NUEVO
+    cargarRejectModal();   // NUEVO
     
-    // Generar calendario inicial
     generateCalendar(currentMonth, currentYear);
 
-    // ---- IMPORTANTE: ----
-    // He quitado los listeners del modal de error de aquí,
-    // porque AHORA se configuran dentro de la función 'cargarErrorModal'
-    // ---- FIN DE LA NOTA ----
-    
-    // Animación de entrada
     document.body.style.opacity = '0';
     setTimeout(() => {
         document.body.style.transition = 'opacity 0.5s ease';
         document.body.style.opacity = '1';
     }, 100);
 
-    // Listeners del calendario
     document.getElementById('prevMonth').addEventListener('click', function() {
-        // ... (Tu código de prevMonth no cambia) ...
         const now = new Date();
         const targetMonth = currentMonth - 1;
         const targetYear = targetMonth < 0 ? currentYear - 1 : currentYear;
@@ -218,7 +233,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.getElementById('nextMonth').addEventListener('click', function() {
-        // ... (Tu código de nextMonth no cambia) ...
         currentMonth++;
         if (currentMonth > 11) {
             currentMonth = 0;
@@ -227,9 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
         generateCalendar(currentMonth, currentYear);
     });
 
-    // Listeners de horarios
     document.querySelectorAll('.time-slot').forEach(slot => {
-        // ... (Tu código de time-slot no cambia) ...
         slot.addEventListener('click', function() {
             if (this.disabled) return;
             document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
@@ -238,9 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Listeners de estilistas
     document.querySelectorAll('.stylist-card').forEach((card, index) => {
-        // ... (Tu código de stylist-card no cambia) ...
         card.addEventListener('click', function() {
             document.querySelectorAll('.stylist-card').forEach(c => c.classList.remove('selected'));
             this.classList.add('selected');
@@ -248,15 +258,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Botón de cancelar (el principal) - Ahora abre el modal
     document.querySelector('.btn-cancel').addEventListener('click', function() {
         openCancelModal();
     });
 });
 
-// Función ASÍNCRONA para cargar el modal de cancelación
 async function cargarModalCancelacion() {
-    // ... (Tu código de cargarModalCancelacion no cambia) ...
     try {
         const response = await fetch('modals/agenda_confirm.html');
         if (!response.ok) {
@@ -271,10 +278,8 @@ async function cargarModalCancelacion() {
             document.getElementById('cancel-modal-close').addEventListener('click', closeCancelModal);
             document.getElementById('cancel-no').addEventListener('click', closeCancelModal);
             document.getElementById('cancel-yes').addEventListener('click', function() {
-    // Redirige a servicios.html
-    window.location.href = 'servicios.html';
-});
-
+                window.location.href = 'servicios.html';
+            });
             
             document.getElementById('cancel-modal').addEventListener('click', function(e) {
                 if (e.target === this) {
@@ -287,26 +292,21 @@ async function cargarModalCancelacion() {
     }
 }
 
-// --- // NUEVA FUNCIÓN PARA CARGAR EL MODAL DE ERROR // ---
 async function cargarErrorModal() {
     try {
-        // 1. Buscamos el HTML del error
         const response = await fetch('modals/agenda_error.html'); 
         if (!response.ok) {
             throw new Error(`Error al cargar modals/agenda_error.html: ${response.statusText}`);
         }
         const htmlModal = await response.text();
 
-        // 2. Lo insertamos en su placeholder
         const placeholder = document.getElementById('modal-placeholder-error');
         if (placeholder) {
             placeholder.innerHTML = htmlModal;
 
-            // 3. (IMPORTANTE) Configuramos sus botones AHORA que el HTML existe
             document.getElementById('error-modal-ok').addEventListener('click', closeErrorModal);
             document.getElementById('error-modal-close-x').addEventListener('click', closeErrorModal);
             
-            // 4. (IMPORTANTE) Configuramos el cierre al hacer clic en el fondo
             document.getElementById('error-modal').addEventListener('click', function(e) {
                 if (e.target === this) {
                     closeErrorModal();
@@ -319,12 +319,68 @@ async function cargarErrorModal() {
     }
 }
 
-
-// Función ASÍNCRONA para cargar el modal de formulario
-async function cargarYConfigurarModal() {
-    
+// --- NUEVA FUNCIÓN PARA CARGAR EL MODAL DE ÉXITO ---
+async function cargarSuccessModal() {
     try {
-        // ... (Tu código de cargarYConfigurarModal no cambia, EXCEPTO el listener de .btn-confirm) ...
+        const response = await fetch('modals/agenda_success.html');
+        if (!response.ok) {
+            throw new Error(`Error al cargar modals/agenda_success.html: ${response.statusText}`);
+        }
+        const htmlModal = await response.text();
+
+        const placeholder = document.getElementById('modal-placeholder-success');
+        if (placeholder) {
+            placeholder.innerHTML = htmlModal;
+
+            document.getElementById('success-modal-btn').addEventListener('click', function() {
+                closeSuccessModal();
+                resetSelections();
+            });
+            
+            document.getElementById('success-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeSuccessModal();
+                    resetSelections();
+                }
+            });
+        }
+    } catch (error) {
+        console.error('No se pudo cargar el modal de éxito:', error);
+    }
+}
+
+// --- NUEVA FUNCIÓN PARA CARGAR EL MODAL DE RECHAZO ---
+async function cargarRejectModal() {
+    try {
+        const response = await fetch('modals/agenda_reject.html');
+        if (!response.ok) {
+            throw new Error(`Error al cargar modals/agenda_reject.html: ${response.statusText}`);
+        }
+        const htmlModal = await response.text();
+
+        const placeholder = document.getElementById('modal-placeholder-reject');
+        if (placeholder) {
+            placeholder.innerHTML = htmlModal;
+
+            document.getElementById('reject-modal-btn').addEventListener('click', function() {
+                closeRejectModal();
+                resetSelections();
+            });
+            
+            document.getElementById('reject-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeRejectModal();
+                    resetSelections();
+                }
+            });
+        }
+    } catch (error) {
+        console.error('No se pudo cargar el modal de rechazo:', error);
+    }
+}
+
+async function cargarYConfigurarModal() {
+    try {
         const response = await fetch('modals/form.html'); 
         
         if (!response.ok) {
@@ -367,11 +423,12 @@ async function cargarYConfigurarModal() {
             console.log('Datos del formulario:', formData);
             
             closePreCitaModal();
-            alert('✅ ¡Cita confirmada exitosamente!\n\nTe esperamos.');
-            resetSelections(); 
+            
+            // AQUÍ DECIDES SI MOSTRAR SUCCESS O REJECT
+            // Por defecto muestro success, pero puedes agregar lógica
+            openSuccessModal();  // O openRejectModal() según tu lógica
         });
 
-        // Botón "Confirmar" PRINCIPAL (Esta lógica sigue igual, usando openErrorModal)
         document.querySelector('.btn-confirm').addEventListener('click', function() {
             
             if (!selectedDate || !selectedTime || selectedStylist === null) {
@@ -380,7 +437,7 @@ async function cargarYConfigurarModal() {
                 if (!selectedTime) errorMessage += '\n- Selecciona un horario';
                 if (selectedStylist === null) errorMessage += '\n- Selecciona un estilista';
                 
-                openErrorModal(errorMessage); // Esto ya funciona bien
+                openErrorModal(errorMessage);
                 return; 
             }
 
@@ -414,10 +471,8 @@ async function cargarYConfigurarModal() {
                     return;
                 }
             }
-            // --- FIN DE VALIDACIONES ---
 
             openPreCitaModal();
-
         });
 
     } catch (error) {

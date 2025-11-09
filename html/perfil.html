@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil - NOMBRE</title>
+         <link rel="stylesheet" href="../Css/modals/logout_confirm.css">
+         <link rel="stylesheet" href="../Css/modals/agendar_servicios.css">
     <link rel="stylesheet" href="../Css/header_footer.css">
     <link rel="stylesheet" href="../Css/modals/notificacion.css">
     <link rel="stylesheet" href="../Css/modals/register.css">
@@ -47,40 +49,60 @@
             </section>
 
             <!-- VISTA: EDITAR PERFIL -->
-            <section id="edit-profile-section" class="profile-section hidden">
-                <h2 class="section-title">Editar Perfil</h2>
-                <form id="edit-profile-form">
-                    <div class="profile-form-group">
-                        <label for="edit-email">Email</label>
-                        <input type="email" id="edit-email" placeholder="Email anterior">
-                        <span class="error-message" id="error-email"></span>
-                    </div>
-                    <div class="profile-form-group">
-                        <label for="edit-email-confirm">Confirmar email</label>
-                        <input type="email" id="edit-email-confirm" placeholder="Confirmar email">
-                        <span class="error-message" id="error-email-confirm"></span>
-                    </div>
-                    <div class="profile-form-group">
-                        <label for="edit-pass">Contraseña</label>
-                        <input type="password" id="edit-pass" placeholder="Contraseña anterior">
-                        <span class="error-message" id="error-pass"></span>
-                    </div>
-                    <div class="profile-form-group">
-                        <label for="edit-pass-confirm">Confirmar contraseña</label>
-                        <input type="password" id="edit-pass-confirm" placeholder="Confirmar contraseña">
-                        <span class="error-message" id="error-pass-confirm"></span>
-                    </div>
-                    <div class="button-group">
-                        <button type="button" id="btn-save" class="btn-outline">Guardar</button>
-                        <button type="button" id="btn-cancel" class="btn-secondary">Cancelar</button>
-                    </div>
-                </form>
-            </section>
+<!-- VISTA: EDITAR PERFIL -->
+<section id="edit-profile-section" class="profile-section hidden">
+    <h2 class="section-title">Editar Perfil</h2>
+    <form id="edit-profile-form">
+        
+        <div class="profile-form-group">
+            <label for="edit-username">Nombre de usuario</label>
+            <input type="text" id="edit-username" placeholder="Usuario anterior">
+            <span class="error-message" id="error-username"></span>
+        </div>
+
+       
+
+        <div class="profile-form-group">
+            <label for="edit-email">Email</label>
+            <input type="email" id="edit-email" placeholder="Email anterior">
+            <span class="error-message" id="error-email"></span>
+        </div>
+
+        <div class="profile-form-group">
+            <label for="edit-email-confirm">Confirmar email</label>
+            <input type="email" id="edit-email-confirm" placeholder="Confirmar email">
+            <span class="error-message" id="error-email-confirm"></span>
+        </div>
+ <div class="profile-form-group">
+            <label for="edit-pass">Contraseña</label>
+            <input type="password" id="edit-pass" placeholder="Contraseña anterior">
+            <span class="error-message" id="error-pass"></span>
+        </div>
+
+        <div class="profile-form-group">
+            <label for="edit-pass-confirm">Confirmar contraseña</label>
+            <input type="password" id="edit-pass-confirm" placeholder="Confirmar contraseña">
+            <span class="error-message" id="error-pass-confirm"></span>
+        </div>
+        <div class="profile-form-group">
+            <label for="edit-phone">Número de teléfono</label>
+            <input type="tel" id="edit-phone" placeholder="9661818289">
+            <span class="error-message" id="error-phone"></span>
+        </div>
+
+       
+
+        <div class="button-group">
+            <button type="button" id="btn-save" class="btn-outline">Guardar</button>
+            <button type="button" id="btn-cancel" class="btn-secondary">Cancelar</button>
+        </div>
+    </form>
+</section>
+
         </div>
     </main>
 
-    <div id="footer-placeholder"></div>
-    
+  
     <!-- ============================================
          MODAL DE CONFIRMACIÓN (¿Guardar cambios?)
          ============================================ -->
@@ -113,6 +135,12 @@
         <p class="modal-message">Tus cambios han sido guardados exitosamente.</p>
         <button id="profile-close-modal" class="modal-button">Aceptar</button>
     </div>
+
+  <div id="footer-placeholder"></div>
+    
+  <div id="modal-placeholder"></div>
+   <div id="modal-placeholder-agendar"></div>
+      <div id="modal-placeholder-logout"></div>
 
     <script src="../js/header_footer.js"></script>
     <script src="../js/perfil.js"></script>

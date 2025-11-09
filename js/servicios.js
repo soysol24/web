@@ -29,6 +29,11 @@ const serviciosMock = [
     }
 ];
 
+// Verificar si el usuario está autenticado
+function isUserAuthenticated() {
+    return localStorage.getItem('isLoggedIn') === 'true';
+}
+
 // Renderizar lista de servicios
 function renderServicesList() {
     const listContainer = document.querySelector('.services-list');
@@ -68,7 +73,7 @@ function renderServiceDetails() {
                 </div>
                 <div class="price-section">
                     <h3>Precio $${servicio.precio}</h3>
-                    <button class="agendar-btn">Agendar +</button>
+                    <button class="agendar-btn" data-service-id="${servicio.id}">Agendar +</button>
                 </div>
             </div>
         `;
@@ -81,20 +86,41 @@ function scrollToService(serviceId) {
     document.getElementById(serviceId).scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
+// Función para abrir el modal de autenticación
+function openAuthModal() {
+    // Esperar a que el modal esté cargado
+    setTimeout(() => {
+        const authModal = document.getElementById('authModal');
+        if (authModal) {
+            authModal.style.display = 'flex';
+            // Guardar la URL de redirección después del login
+            sessionStorage.setItem('redirectAfterAuth', 'agendar.html');
+        } else {
+            console.error('Modal de autenticación no encontrado');
+        }
+    }, 100);
+}
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     renderServicesList();
     renderServiceDetails();
 
-    // Botones agendar
-    // Botones agendar
-document.body.addEventListener('click', e => {
-    if (e.target.classList.contains('agendar-btn')) {
-        // Redirigir a la página de agendar
-        window.location.href = "agendar.html";
-    }
-});
-
+    // Botones agendar con validación de autenticación
+    document.body.addEventListener('click', e => {
+        if (e.target.classList.contains('agendar-btn')) {
+            e.preventDefault();
+            
+            // Verificar si el usuario está autenticado
+            if (isUserAuthenticated()) {
+                // Usuario autenticado: redirigir a la página de agendar
+                window.location.href = "agendar.html";
+            } else {
+                // Usuario NO autenticado: mostrar modal de login
+                openAuthModal();
+            }
+        }
+    });
 
     // Resaltar servicio activo
     const serviceItems = document.querySelectorAll('.service-item');
