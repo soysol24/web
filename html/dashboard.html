@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de gestión para salón de belleza - Glam Soft">
+    <meta name="author" content="Glam Soft">
+    <title>Glam Soft - Dashboard Administrativo</title>
+    
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- ========================================== -->
+        <!-- SIDEBAR - MENÚ LATERAL -->
+        <!-- ========================================== -->
+        <aside class="sidebar">
+            <div class="business-name">Glam Soft</div>
+            <nav class="sidebar-nav" aria-label="Menú principal de navegación">
+                <ul>
+                    <li class="nav-item active" data-view="calendar-month">
+                        <a href="#inicio" class="nav-link" aria-label="Ir a inicio">
+                            <i class="fas fa-home" aria-hidden="true"></i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="portfolio">
+                        <a href="#portafolio" class="nav-link" aria-label="Ver portafolio">
+                            <i class="fas fa-briefcase" aria-hidden="true"></i>
+                            <span>Portafolio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="promotion">
+                        <a href="#promocion" class="nav-link" aria-label="Gestionar promociones">
+                            <i class="fas fa-bullhorn" aria-hidden="true"></i>
+                            <span>Promoción</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="services">
+                        <a href="#servicios" class="nav-link" aria-label="Gestionar servicios">
+                            <i class="fas fa-cut" aria-hidden="true"></i>
+                            <span>Servicios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="stylists">
+                        <a href="#estilistas" class="nav-link" aria-label="Gestionar estilistas">
+                            <i class="fas fa-user-tie" aria-hidden="true"></i>
+                            <span>Estilistas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="reports">
+                        <a href="#reportes" class="nav-link" aria-label="Ver reportes">
+                            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                            <span>Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="form">
+                        <a href="#formularios" class="nav-link" aria-label="Gestionar formularios">
+                            <i class="fas fa-file-alt" aria-hidden="true"></i>
+                            <span>Formulario</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="comments">
+                        <a href="#comentarios" class="nav-link" aria-label="Ver comentarios">
+                            <i class="fas fa-comment-dots" aria-hidden="true"></i>
+                            <span>Comentarios</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="logout-section">
+                <a href="#logout" class="nav-link" aria-label="Cerrar sesión">
+                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- ========================================== -->
+        <!-- CONTENIDO PRINCIPAL -->
+        <!-- ========================================== -->
+        <main class="main-content">
+            <!-- HEADER -->
+            <header class="main-header">
+                <h1 class="welcome-message">Bienvenido, Administrador</h1>
+                <div class="header-icons">
+                    <button class="icon-btn" aria-label="Notificaciones" title="Ver notificaciones">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                    </button>
+                    <button class="icon-btn" id="profileIconBtn" aria-label="Perfil de usuario" title="Ver perfil">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- ========================================== -->
+            <!-- SECCIÓN DE PORTAFOLIO -->
+            <!-- ========================================== -->
+            <section class="portfolio-section" style="display: none;" aria-labelledby="portfolio-title">
+                <h2 id="portfolio-title">PORTAFOLIO</h2>
+                <button class="add-image-btn" id="addImageSlotBtn" aria-label="Agregar nuevo espacio para imagen">
+                    <i class="fas fa-plus" aria-hidden="true"></i>
+                    <span>Agregar Espacio para Imagen</span>
+                </button>
+                <div class="portfolio-grid" id="portfolioGrid" role="list">
+                    <!-- Las imágenes se generan dinámicamente -->
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECCIÓN DE PROMOCIÓN -->
+            <!-- ========================================== -->
+            <section class="promotion-section" style="display: none;" aria-labelledby="promotion-title">
+                <div class="section-header">
+                    <h2 id="promotion-title">Promociones</h2>
+                    <button class="add-btn" id="addPromotionBtn" aria-label="Agregar nueva promoción">
+                        Agregar
+                    </button>
+                </div>
+                <div class="promotions-grid" id="promotionsGrid" role="list">
+                    <!-- Tarjetas de promoción se generan aquí -->
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECCIÓN DE SERVICIOS -->
+            <!-- ========================================== -->
+            <section class="services-section" style="display: none;" aria-labelledby="services-title">
+                <div class="section-header">
+                    <h2 id="services-title">Servicios</h2>
+                    <button class="add-btn" id="addServiceBtn" aria-label="Agregar nuevo servicio">
+                        Agregar
+                    </button>
+                </div>
+                <div class="services-grid" id="servicesGrid" role="list">
+                    <!-- Tarjetas de servicios se generan aquí -->
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECCIÓN DE ESTILISTAS -->
+            <!-- ========================================== -->
+            <section class="stylists-section" style="display: none;" aria-labelledby="stylists-title">
+                <div class="section-header">
+                    <h2 id="stylists-title">Estilistas</h2>
+                    <button class="add-btn" id="addStylistBtn" aria-label="Agregar nuevo estilista">
+                        Agregar
+                    </button>
+                </div>
+                <div class="stylists-list" id="stylistsList" role="list">
+                    <!-- Tarjetas de estilistas se generan aquí -->
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECCIÓN DE REPORTES -->
+            <!-- ========================================== -->
+            <section class="reports-section" style="display: none;" aria-labelledby="reports-title">
+                <h2 id="reports-title">REPORTES</h2>
+                <div class="reports-content">
+                    <p class="placeholder-text">Sección de reportes en desarrollo...</p>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECCIÓN DE FORMULARIO -->
+            <!-- ========================================== -->
+            <section class="form-section" style="display: none;" aria-labelledby="form-title">
+                <div class="section-header">
+                    <h2 id="form-title">Formularios</h2>
+                    <button class="add-btn" id="addFormBtn" aria-label="Agregar nuevo formulario">
+                        Agregar
+                    </button>
+                </div>
+                <div class="forms-list" id="formsList" role="list">
+                    <!-- Tarjetas de formularios se generan aquí -->
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECCIÓN DE COMENTARIOS -->
+            <!-- ========================================== -->
+            <section class="comments-section" style="display: none;" aria-labelledby="comments-title">
+                <h2 id="comments-title">COMENTARIOS</h2>
+                <div class="comments-content">
+                    <p class="placeholder-text">Sección de comentarios en desarrollo...</p>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECCIÓN DE PERFIL DE USUARIO -->
+            <!-- ========================================== -->
+            <section class="profile-section" style="display: none;" aria-labelledby="profile-title">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <div class="avatar-placeholder" role="img" aria-label="Foto de perfil"></div>
+                            <div class="profile-name-section">
+                                <h3 id="profile-title">Administrador</h3>
+                                <a href="#historial" class="view-history">Ver historial de citas</a>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="profileForm" class="profile-form">
+                        <div class="form-group">
+                            <label for="profileUsername">Nombre de usuario</label>
+                            <input type="text" id="profileUsername" name="username" value="admin123" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profilePhone">Teléfono</label>
+                            <input type="tel" id="profilePhone" name="phone" value="555-1234" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileEmail">Email</label>
+                            <input type="email" id="profileEmail" name="email" value="admin@glamsoft.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profilePassword">Contraseña</label>
+                            <input type="password" id="profilePassword" name="password" value="********" required>
+                        </div>
+                        <div class="profile-actions">
+                            <button type="submit" class="btn primary">Editar</button>
+                            <button type="button" class="btn secondary" id="logoutProfileBtn">Cerrar Sesión</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECCIÓN DE CALENDARIO -->
+            <!-- ========================================== -->
+            <section class="calendar-section" aria-labelledby="calendar-title">
+                <h2 id="calendar-title">CALENDARIO DE CITAS</h2>
+
+                <!-- CONTROLES DEL CALENDARIO -->
+                <div class="calendar-controls">
+                    <div class="calendar-nav">
+                        <button class="nav-arrow" id="prevMonthBtn" aria-label="Mes anterior">
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        <button class="nav-arrow" id="prevDayBtn" style="display: none;" aria-label="Día anterior">
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        <span id="currentMonthYear" aria-live="polite">Febrero 2025</span>
+                        <button class="nav-arrow" id="nextMonthBtn" aria-label="Mes siguiente">
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                        <button class="nav-arrow" id="nextDayBtn" style="display: none;" aria-label="Día siguiente">
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="view-switcher" role="group" aria-label="Cambiar vista de calendario">
+                        <button class="view-btn active" id="monthViewBtn" aria-pressed="true">Mes</button>
+                        <button class="view-btn" id="dayViewBtn" aria-pressed="false">Día</button>
+                    </div>
+                    <button class="edit-btn" id="editCalendarBtn" aria-label="Modo de edición">Editar</button>
+                </div>
+
+                <!-- VISTA DE CALENDARIO MENSUAL -->
+                <div id="calendarMonthView" class="calendar-view active" role="region" aria-label="Vista de calendario mensual">
+                    <div class="month-calendar-grid" role="grid">
+                        <div class="day-header" role="columnheader">LUN</div>
+                        <div class="day-header" role="columnheader">MAR</div>
+                        <div class="day-header" role="columnheader">MIÉ</div>
+                        <div class="day-header" role="columnheader">JUE</div>
+                        <div class="day-header" role="columnheader">VIE</div>
+                        <div class="day-header" role="columnheader">SÁB</div>
+                        <div class="day-header" role="columnheader">DOM</div>
+                        <!-- Los días se generan dinámicamente con JavaScript -->
+                    </div>
+                </div>
+
+                <!-- VISTA DE CALENDARIO DIARIO -->
+                <div id="calendarDayView" class="calendar-view" role="region" aria-label="Vista de calendario diario">
+                    <div class="day-view-header">
+                        <span id="currentDay" aria-live="polite">Día seleccionado</span>
+                    </div>
+                    <div class="day-timeline" role="table">
+                        <!-- Los slots de tiempo se generan dinámicamente con JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODALES -->
+    <!-- ========================================== -->
+
+    <!-- MODAL: AGREGAR/EDITAR CITA -->
+    <div id="addAppointmentModal" class="modal-overlay" role="dialog" aria-labelledby="modal-appointment-title" aria-modal="true">
+        <div class="modal-content add-appointment-modal">
+            <div class="modal-header">
+                <h3 id="modal-appointment-title">AGENDAR NUEVA CITA</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addAppointmentForm">
+                    <div class="form-group">
+                        <label for="clientName">Cliente <span aria-hidden="true">*</span></label>
+                        <select id="clientName" name="client" required aria-required="true">
+                            <option value="" disabled selected>Seleccionar cliente</option>
+                            <option value="Juan Perez">Juan Perez</option>
+                            <option value="Maria Lopez">Maria Lopez</option>
+                            <option value="Carlos Gomez">Carlos Gomez</option>
+                            <option value="Sofia Diaz">Sofia Diaz</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceType">Servicio <span aria-hidden="true">*</span></label>
+                        <select id="serviceType" name="service" required aria-required="true">
+                            <option value="" disabled selected>Seleccionar servicio</option>
+                            <option value="Corte">Corte</option>
+                            <option value="Tinte">Tinte</option>
+                            <option value="Manicure">Manicure</option>
+                            <option value="Pedicure">Pedicure</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="stylist">Estilista <span aria-hidden="true">*</span></label>
+                        <select id="stylist" name="stylist" required aria-required="true">
+                            <option value="" disabled selected>Seleccionar estilista</option>
+                            <option value="Estilista 1">Estilista 1</option>
+                            <option value="Estilista 2">Estilista 2</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentDate">Fecha <span aria-hidden="true">*</span></label>
+                        <input type="date" id="appointmentDate" name="date" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentTime">Hora <span aria-hidden="true">*</span></label>
+                        <input type="time" id="appointmentTime" name="time" required aria-required="true">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn primary">Guardar</button>
+                        <button type="button" class="btn secondary" id="cancelAddAppointment">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRMAR GUARDAR -->
+    <div id="confirmSaveModal" class="modal-overlay" role="dialog" aria-labelledby="modal-save-title" aria-modal="true">
+        <div class="modal-content confirmation-modal save-modal">
+            <div class="modal-header header-success">
+                <h3 id="modal-save-title">GUARDAR</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que quiere guardar las modificaciones?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelSaveConfirm">Cancelar</button>
+                <button class="btn primary btn-success" id="acceptSaveConfirm">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRMAR CANCELAR -->
+    <div id="confirmCancelModal" class="modal-overlay" role="dialog" aria-labelledby="modal-cancel-title" aria-modal="true">
+        <div class="modal-content confirmation-modal cancel-modal">
+            <div class="modal-header header-error">
+                <h3 id="modal-cancel-title">CANCELAR</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que desea cancelar el proceso?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelCancelConfirm">No</button>
+                <button class="btn primary btn-error" id="acceptCancelConfirm">Sí, Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: GUARDADO EXITOSO -->
+    <div id="saveSuccessModal" class="modal-overlay" role="dialog" aria-labelledby="modal-success-title" aria-modal="true">
+        <div class="modal-content confirmation-modal success-modal">
+            <div class="modal-header header-success">
+                <h3 id="modal-success-title">GUARDADO</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>La cita se ha guardado exitosamente</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn primary btn-success" id="okSuccessConfirm">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRMAR ACEPTAR CITA -->
+    <div id="confirmAcceptModal" class="modal-overlay" role="dialog" aria-labelledby="modal-accept-title" aria-modal="true">
+        <div class="modal-content confirmation-modal">
+            <div class="modal-header header-success">
+                <h3 id="modal-accept-title">CONFIRMAR CITA</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que quiere confirmar la cita?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelAcceptConfirm">Cancelar</button>
+                <button class="btn primary btn-success" id="acceptAcceptConfirm">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRMAR RECHAZAR CITA -->
+    <div id="confirmRejectModal" class="modal-overlay" role="dialog" aria-labelledby="modal-reject-title" aria-modal="true">
+        <div class="modal-content confirmation-modal">
+            <div class="modal-header header-error">
+                <h3 id="modal-reject-title">RECHAZAR CITA</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que desea rechazar la cita?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelRejectConfirm">Cancelar</button>
+                <button class="btn primary btn-error" id="acceptRejectConfirm">Rechazar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRMAR ELIMINAR CITA -->
+    <div id="confirmDeleteModal" class="modal-overlay" role="dialog" aria-labelledby="modal-delete-title" aria-modal="true">
+        <div class="modal-content confirmation-modal">
+            <div class="modal-header header-error">
+                <h3 id="modal-delete-title">ELIMINAR CITA</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que quiere eliminar el elemento?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelDeleteConfirm">Cancelar</button>
+                <button class="btn primary btn-error" id="acceptDeleteConfirm">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRMAR REAGENDAR CITA -->
+    <div id="confirmRescheduleModal" class="modal-overlay" role="dialog" aria-labelledby="modal-reschedule-title" aria-modal="true">
+        <div class="modal-content confirmation-modal">
+            <div class="modal-header" style="color: #4A90E2;">
+                <h3 id="modal-reschedule-title">REAGENDAR CITA</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que quiere reagendar la cita?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelRescheduleConfirm">Cancelar</button>
+                <button class="btn primary" id="acceptRescheduleConfirm" style="background-color: #4A90E2;">Reagendar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: ÉXITO EN ACCIÓN -->
+    <div id="actionSuccessModal" class="modal-overlay" role="dialog" aria-labelledby="action-success-title" aria-modal="true">
+        <div class="modal-content confirmation-modal success-modal">
+            <div class="modal-header header-success">
+                <h3 id="actionSuccessTitle">ÉXITO</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="actionSuccessMessage">La acción se ha completado exitosamente</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn primary btn-success" id="okActionSuccess">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: NUEVA PROMOCIÓN -->
+    <div id="addPromotionModal" class="modal-overlay" role="dialog" aria-labelledby="modal-promotion-title" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-promotion-title">Nueva promoción</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addPromotionForm" class="two-column-form">
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="promotionName">Nombre de la promoción:</label>
+                            <input type="text" id="promotionName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promotionDuration">Duración aproximada:</label>
+                            <input type="text" id="promotionDuration" name="duration" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promotionDescription">Descripción de la promoción:</label>
+                            <input type="text" id="promotionDescription" name="description" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promotionIncludes">Lo que incluye:</label>
+                            <input type="text" id="promotionIncludes" name="includes" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promotionPrice">Precio:</label>
+                            <input type="text" id="promotionPrice" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promotionForm">Asignar formulario:</label>
+                            <select id="promotionForm" name="form" required>
+                                <option value="" disabled selected>Seleccionar</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="promotionValidity">Vigencia de la promoción:</label>
+                            <input type="text" id="promotionValidity" name="validity" required>
+                        </div>
+                    </div>
+                    <div class="form-column image-upload-column">
+                        <div class="image-upload-area" id="promotionImageUpload" tabindex="0" role="button" aria-label="Subir imagen de promoción">
+                            <i class="fas fa-upload" aria-hidden="true"></i>
+                            <span>Subir imagen</span>
+                            <input type="file" accept="image/*" style="display: none;" aria-label="Seleccionar archivo de imagen">
+                        </div>
+                    </div>
+                    <div class="modal-actions full-width">
+                        <button type="submit" class="btn primary">Agregar</button>
+                        <button type="button" class="btn secondary cancel-promotion">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: NUEVO SERVICIO -->
+    <div id="addServiceModal" class="modal-overlay" role="dialog" aria-labelledby="modal-service-title" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-service-title">Nuevo servicio</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addServiceForm" class="two-column-form">
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="serviceName">Nombre servicio:</label>
+                            <input type="text" id="serviceName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceDuration">Duración aproximada del servicio:</label>
+                            <input type="text" id="serviceDuration" name="duration" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceDescription">Descripción del servicio:</label>
+                            <input type="text" id="serviceDescription" name="description" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceIncludes">Lo que incluye:</label>
+                            <input type="text" id="serviceIncludes" name="includes" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="servicePrice">Precio:</label>
+                            <input type="text" id="servicePrice" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceForm">Asignar formulario:</label>
+                            <select id="serviceForm" name="form" required>
+                                <option value="" disabled selected>Seleccionar</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-column image-upload-column">
+                        <div class="image-upload-area" id="serviceImageUpload" tabindex="0" role="button" aria-label="Subir imagen de servicio">
+                            <i class="fas fa-upload" aria-hidden="true"></i>
+                            <span>Subir imagen</span>
+                            <input type="file" accept="image/*" style="display: none;" aria-label="Seleccionar archivo de imagen">
+                        </div>
+                    </div>
+                    <div class="modal-actions full-width">
+                        <button type="button" class="btn secondary cancel-service">Cancelar</button>
+                        <button type="submit" class="btn primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: NUEVO ESTILISTA -->
+    <div id="addStylistModal" class="modal-overlay" role="dialog" aria-labelledby="modal-stylist-title" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-stylist-title">Nuevo estilista</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addStylistForm" class="single-column-form">
+                    <div class="form-group">
+                        <label for="stylistName">Nombre</label>
+                        <input type="text" id="stylistName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stylistPhone">Teléfono</label>
+                        <input type="tel" id="stylistPhone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stylistUser">Usuario</label>
+                        <input type="text" id="stylistUser" name="user" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stylistPassword">Contraseña</label>
+                        <input type="password" id="stylistPassword" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stylistServices">Servicios</label>
+                        <select id="stylistServices" name="services" required>
+                            <option value="" disabled selected>Seleccionar</option>
+                            <option value="Corte">Corte</option>
+                            <option value="Tinte">Tinte</option>
+                            <option value="Manicure">Manicure</option>
+                            <option value="Pedicure">Pedicure</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="stylistSchedule">Horarios</label>
+                        <select id="stylistSchedule" name="schedule" required>
+                            <option value="" disabled selected>Seleccionar</option>
+                            <option value="Lun-Vie 9:00-18:00">Lun-Vie 9:00-18:00</option>
+                            <option value="Lun-Sab 10:00-19:00">Lun-Sab 10:00-19:00</option>
+                            <option value="Mar-Dom 11:00-20:00">Mar-Dom 11:00-20:00</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="stylistOccupation">Ocupación</label>
+                        <input type="text" id="stylistOccupation" name="occupation" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn primary">Agregar</button>
+                        <button type="button" class="btn secondary cancel-stylist">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CREAR FORMULARIO -->
+    <div id="addFormModal" class="modal-overlay" role="dialog" aria-labelledby="modal-form-title" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-form-title">Formulario</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addFormularioForm" class="single-column-form">
+                    <div id="formQuestionsContainer">
+                        <div class="form-question-item">
+                            <div class="form-group">
+                                <label>Pregunta</label>
+                                <input type="text" class="question-input" placeholder="Escribe la pregunta" required>
+                            </div>
+                            <button type="button" class="remove-question-btn" aria-label="Eliminar pregunta">
+                                <i class="fas fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" class="add-question-btn" id="addQuestionBtn" aria-label="Agregar nueva pregunta">
+                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        <span>Agregar pregunta</span>
+                    </button>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn primary">Guardar</button>
+                        <button type="button" class="btn secondary cancel-form">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CERRAR SESIÓN -->
+    <div id="logoutModal" class="modal-overlay" role="dialog" aria-labelledby="modal-logout-title" aria-modal="true">
+        <div class="modal-content confirmation-modal">
+            <div class="modal-header header-error">
+                <h3 id="modal-logout-title">CERRAR SESIÓN</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que quiere cerrar sesión?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelLogout">Cancelar</button>
+                <button class="btn primary btn-error" id="acceptLogout">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../JAVA_SCRIPT/dashboard.js"></script>
+</body>
+</html>
