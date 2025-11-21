@@ -1,0 +1,44 @@
+<div class="servicios-module">
+    <div class="section-header">
+        <h2>Servicios</h2>
+        <button class="add-btn" id="addServiceBtn">Agregar</button>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+</div>
+
+<div id="addServiceModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="serviceModalTitle">Nuevo servicio</h3>
+            <button class="close-modal-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <form id="addServiceForm">
+                <div class="form-group">
+                    <label>Nombre servicio:</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Duración aproximada:</label>
+                    <input type="text" name="duration" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción:</label>
+                    <textarea name="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Lo que incluye:</label>
+                    <input type="text" name="includes" required>
+                </div>
+                <div class="form-group">
+                    <label>Precio:</label>
+                    <input type="text" name="price" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn primary">Guardar</button>
+                    <button type="button" class="btn secondary cancel-service">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

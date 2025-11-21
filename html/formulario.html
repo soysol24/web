@@ -1,0 +1,49 @@
+<!-- ========================================== -->
+<!-- SECCIÓN DE FORMULARIO -->
+<!-- ========================================== -->
+<section class="form-section" style="display: none;" aria-labelledby="form-title">
+    <div class="section-header">
+        <h2 id="form-title">Formularios</h2>
+        <button class="add-btn" id="addFormBtn" aria-label="Agregar nuevo formulario">
+            Agregar
+        </button>
+    </div>
+    <div class="forms-list" id="formsList" role="list">
+        <!-- Tarjetas de formularios se generan aquí -->
+    </div>
+</section>
+
+<!-- MODAL: CREAR FORMULARIO -->
+<div id="addFormModal" class="modal-overlay" role="dialog" aria-labelledby="modal-form-title" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modal-form-title">Formulario</h3>
+            <button class="close-modal-btn" aria-label="Cerrar modal">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="addFormularioForm" class="single-column-form">
+                <div id="formQuestionsContainer">
+                    <div class="form-question-item">
+                        <div class="form-group">
+                            <label>Pregunta</label>
+                            <input type="text" class="question-input" placeholder="Escribe la pregunta" required>
+                        </div>
+                        <button type="button" class="remove-question-btn" aria-label="Eliminar pregunta">
+                            <i class="fas fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="button" class="add-question-btn" id="addQuestionBtn" aria-label="Agregar nueva pregunta">
+                    <i class="fas fa-plus" aria-hidden="true"></i>
+                    <span>Agregar pregunta</span>
+                </button>
+                <div class="modal-actions">
+                    <button type="submit" class="btn primary">Guardar</button>
+                    <button type="button" class="btn secondary cancel-form">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="promocion-module">
+    <div class="section-header">
+        <h2>Promociones</h2>
+        <button class="add-btn" id="addPromotionBtn">Agregar</button>
+    </div>
+    <div class="promotions-grid" id="promotionsGrid"></div>
+</div>
+
+<div id="addPromotionModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="promotionModalTitle">Nueva promoción</h3>
+            <button class="close-modal-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <form id="addPromotionForm">
+                <div class="form-group">
+                    <label>Nombre de la promoción:</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Duración aproximada:</label>
+                    <input type="text" name="duration" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción:</label>
+                    <textarea name="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Lo que incluye:</label>
+                    <input type="text" name="includes" required>
+                </div>
+                <div class="form-group">
+                    <label>Precio:</label>
+                    <input type="text" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label>Vigencia:</label>
+                    <input type="text" name="validity" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn primary">Agregar</button>
+                    <button type="button" class="btn secondary cancel-promotion">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

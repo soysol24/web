@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de gestión para salón de belleza - Glam Soft">
+    <meta name="author" content="Glam Soft">
+    <title>Glam Soft - Dashboard Administrativo</title>
+    
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS común -->
+    <link rel="stylesheet" href="../CSS/common.css">
+    
+    <!-- CSS de módulos -->
+    <link rel="stylesheet" href="../CSS/inicio.css">
+    <link rel="stylesheet" href="../CSS/portafolio.css">
+    <link rel="stylesheet" href="../CSS/promocion.css">
+    <link rel="stylesheet" href="../CSS/servicios.css">
+    <link rel="stylesheet" href="../CSS/estilistas.css">
+    <link rel="stylesheet" href="../CSS/reportes.css">
+    <link rel="stylesheet" href="../CSS/formulario.css">
+    <link rel="stylesheet" href="../CSS/comentarios.css">
+    <link rel="stylesheet" href="../CSS/notificaciones.css">
+    <link rel="stylesheet" href="../CSS/historial.css">
+    <link rel="stylesheet" href="../CSS/perfil.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- ========================================== -->
+        <!-- SIDEBAR - MENÚ LATERAL -->
+        <!-- ========================================== -->
+        <aside class="sidebar">
+            <div class="business-name">Glam Soft</div>
+            <nav class="sidebar-nav" aria-label="Menú principal de navegación">
+                <ul>
+                    <li class="nav-item active" data-view="inicio">
+                        <a href="#inicio" class="nav-link" aria-label="Ir a inicio">
+                            <i class="fas fa-home" aria-hidden="true"></i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="portafolio">
+                        <a href="#portafolio" class="nav-link" aria-label="Ver portafolio">
+                            <i class="fas fa-briefcase" aria-hidden="true"></i>
+                            <span>Portafolio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="promocion">
+                        <a href="#promocion" class="nav-link" aria-label="Gestionar promociones">
+                            <i class="fas fa-bullhorn" aria-hidden="true"></i>
+                            <span>Promoción</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="servicios">
+                        <a href="#servicios" class="nav-link" aria-label="Gestionar servicios">
+                            <i class="fas fa-cut" aria-hidden="true"></i>
+                            <span>Servicios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="estilistas">
+                        <a href="#estilistas" class="nav-link" aria-label="Gestionar estilistas">
+                            <i class="fas fa-user-tie" aria-hidden="true"></i>
+                            <span>Estilistas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="reportes">
+                        <a href="#reportes" class="nav-link" aria-label="Ver reportes">
+                            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                            <span>Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="formulario">
+                        <a href="#formularios" class="nav-link" aria-label="Gestionar formularios">
+                            <i class="fas fa-file-alt" aria-hidden="true"></i>
+                            <span>Formulario</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-view="comentarios">
+                        <a href="#comentarios" class="nav-link" aria-label="Ver comentarios">
+                            <i class="fas fa-comment-dots" aria-hidden="true"></i>
+                            <span>Comentarios</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="logout-section">
+                <a href="#logout" class="nav-link" aria-label="Cerrar sesión" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- ========================================== -->
+        <!-- CONTENIDO PRINCIPAL -->
+        <!-- ========================================== -->
+        <main class="main-content">
+            <!-- HEADER -->
+            <header class="main-header">
+                <h1 class="welcome-message">Bienvenido, Administrador</h1>
+                <div class="header-icons">
+                    <button class="icon-btn" id="notificationsIconBtn" aria-label="Notificaciones" title="Ver notificaciones">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                    </button>
+                    <button class="icon-btn" id="profileIconBtn" aria-label="Perfil de usuario" title="Ver perfil">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- ========================================== -->
+            <!-- CONTENEDORES DE MÓDULOS -->
+            <!-- ========================================== -->
+            <div id="inicio-section" class="content-section"></div>
+            <div id="portafolio-section" class="content-section" style="display: none;"></div>
+            <div id="promocion-section" class="content-section" style="display: none;"></div>
+            <div id="servicios-section" class="content-section" style="display: none;"></div>
+            <div id="estilistas-section" class="content-section" style="display: none;"></div>
+            <div id="reportes-section" class="content-section" style="display: none;"></div>
+            <div id="formulario-section" class="content-section" style="display: none;"></div>
+            <div id="comentarios-section" class="content-section" style="display: none;"></div>
+            <div id="notificaciones-section" class="content-section" style="display: none;"></div>
+            <div id="historial-section" class="content-section" style="display: none;"></div>
+            <div id="perfil-section" class="content-section" style="display: none;"></div>
+        </main>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODALES COMPARTIDOS -->
+    <!-- ========================================== -->
+
+    <!-- MODAL: CONFIRMAR GUARDAR ITEM -->
+    <div id="confirmSaveItemModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-content confirmation-modal">
+            <div class="modal-header header-success">
+                <h3>GUARDAR</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmSaveItemMessage">¿Está seguro de que quiere guardar las modificaciones?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelSaveItem">Cancelar</button>
+                <button class="btn primary btn-success" id="acceptSaveItem">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRMAR CANCELAR ITEM -->
+    <div id="confirmCancelItemModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-content confirmation-modal">
+            <div class="modal-header header-error">
+                <h3>CANCELAR</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que desea cancelar el proceso?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelCancelItem">No</button>
+                <button class="btn primary btn-error" id="acceptCancelItem">Sí, Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRMAR ELIMINAR ITEM -->
+    <div id="confirmDeleteItemModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-content confirmation-modal">
+            <div class="modal-header header-error">
+                <h3>ELIMINAR</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que quiere eliminar el elemento?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelDeleteItem">Cancelar</button>
+                <button class="btn primary btn-error" id="acceptDeleteItem">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: GUARDADO EXITOSO ITEM -->
+    <div id="saveItemSuccessModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-content confirmation-modal">
+            <div class="modal-header header-success">
+                <h3>GUARDADO</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="saveItemSuccessMessage">El elemento se ha guardado exitosamente</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn primary btn-success" id="okItemSuccess">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: CERRAR SESIÓN -->
+    <div id="logoutModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-content confirmation-modal">
+            <div class="modal-header header-error">
+                <h3>CERRAR SESIÓN</h3>
+                <button class="close-modal-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que quiere cerrar sesión?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancelLogout">Cancelar</button>
+                <button class="btn primary btn-error" id="acceptLogout">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SCRIPTS -->
+    <!-- ========================================== -->
+    
+    <!-- JavaScript común -->
+    <script src="../JAVA_SCRIPT/common.js"></script>
+    
+    <!-- JavaScript de módulos -->
+    <script src="../JAVA_SCRIPT/inicio.js"></script>
+    <script src="../JAVA_SCRIPT/portafolio.js"></script>
+    <script src="../JAVA_SCRIPT/promocion.js"></script>
+    <script src="../JAVA_SCRIPT/servicios.js"></script>
+    <script src="../JAVA_SCRIPT/estilistas.js"></script>
+    <script src="../JAVA_SCRIPT/reportes.js"></script>
+    <script src="../JAVA_SCRIPT/formulario.js"></script>
+    <script src="../JAVA_SCRIPT/comentarios.js"></script>
+    <script src="../JAVA_SCRIPT/notificaciones.js"></script>
+    <script src="../JAVA_SCRIPT/historial.js"></script>
+    <script src="../JAVA_SCRIPT/perfil.js"></script>
+    
+    <!-- Controlador principal -->
+    <script src="../JAVA_SCRIPT/dashboard.js"></script>
+</body>
+</html>

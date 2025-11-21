@@ -1,0 +1,33 @@
+<div class="perfil-module">
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <div class="avatar-placeholder"><i class="fas fa-user"></i></div>
+            </div>
+            <div class="profile-info">
+                <h3>Administrador</h3>
+                <p class="profile-role">Administrador del Sistema</p>
+            </div>
+        </div>
+        <form id="profileForm" class="profile-form">
+            <div class="form-group">
+                <label>Nombre de usuario</label>
+                <input type="text" name="username" value="Administrador" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" value="admin@glamsoft.com" required>
+            </div>
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input type="tel" name="phone" value="555-123-4567" required>
+            </div>
+            <div class="profile-actions">
+                <button type="submit" class="btn primary"><i class="fas fa-save"></i> Editar</button>
+                <button type="button" class="btn secondary btn-logout" id="logoutProfileBtn">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

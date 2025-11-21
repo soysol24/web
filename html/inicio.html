@@ -1,0 +1,107 @@
+<div class="calendar-module">
+    <h2 id="calendar-title">CALENDARIO DE CITAS</h2>
+
+    <!-- CONTROLES DEL CALENDARIO -->
+    <div class="calendar-controls">
+        <div class="calendar-nav">
+            <button class="nav-arrow" id="prevMonthBtn" aria-label="Mes anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-arrow" id="prevDayBtn" style="display: none;" aria-label="Día anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <span id="currentMonthYear" aria-live="polite">Febrero 2025</span>
+            <button class="nav-arrow" id="nextMonthBtn" aria-label="Mes siguiente">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <button class="nav-arrow" id="nextDayBtn" style="display: none;" aria-label="Día siguiente">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="view-switcher">
+            <button class="view-btn active" id="monthViewBtn">Mes</button>
+            <button class="view-btn" id="dayViewBtn">Día</button>
+        </div>
+        <button class="edit-btn" id="editCalendarBtn">Editar</button>
+    </div>
+
+    <!-- VISTA DE CALENDARIO MENSUAL -->
+    <div id="calendarMonthView" class="calendar-view active">
+        <div class="month-calendar-grid">
+            <div class="day-header">LUN</div>
+            <div class="day-header">MAR</div>
+            <div class="day-header">MIÉ</div>
+            <div class="day-header">JUE</div>
+            <div class="day-header">VIE</div>
+            <div class="day-header">SÁB</div>
+            <div class="day-header">DOM</div>
+            <!-- Los días se generan dinámicamente -->
+        </div>
+    </div>
+
+    <!-- VISTA DE CALENDARIO DIARIO -->
+    <div id="calendarDayView" class="calendar-view">
+        <div class="day-view-header">
+            <span id="currentDay">Día seleccionado</span>
+        </div>
+        <div class="day-timeline">
+            <!-- Los slots de tiempo se generan dinámicamente -->
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: AGREGAR/EDITAR CITA -->
+<div id="addAppointmentModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modal-appointment-title">AGENDAR NUEVA CITA</h3>
+            <button class="close-modal-btn" aria-label="Cerrar modal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="addAppointmentForm">
+                <div class="form-group">
+                    <label for="clientName">Cliente <span>*</span></label>
+                    <select id="clientName" name="client" required>
+                        <option value="" disabled selected>Seleccionar cliente</option>
+                        <option value="Juan Perez">Juan Perez</option>
+                        <option value="Maria Lopez">Maria Lopez</option>
+                        <option value="Carlos Gomez">Carlos Gomez</option>
+                        <option value="Sofia Diaz">Sofia Diaz</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="serviceType">Servicio <span>*</span></label>
+                    <select id="serviceType" name="service" required>
+                        <option value="" disabled selected>Seleccionar servicio</option>
+                        <option value="Corte">Corte</option>
+                        <option value="Tinte">Tinte</option>
+                        <option value="Manicure">Manicure</option>
+                        <option value="Pedicure">Pedicure</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="stylist">Estilista <span>*</span></label>
+                    <select id="stylist" name="stylist" required>
+                        <option value="" disabled selected>Seleccionar estilista</option>
+                        <option value="Estilista 1">Estilista 1</option>
+                        <option value="Estilista 2">Estilista 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentDate">Fecha <span>*</span></label>
+                    <input type="date" id="appointmentDate" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentTime">Hora <span>*</span></label>
+                    <input type="time" id="appointmentTime" name="time" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn primary">Guardar</button>
+                    <button type="button" class="btn secondary" id="cancelAddAppointment">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="estilistas-module">
+    <div class="section-header">
+        <h2>Estilistas</h2>
+        <button class="add-btn" id="addStylistBtn">Agregar</button>
+    </div>
+    <div class="stylists-list" id="stylistsList"></div>
+</div>
+
+<div id="addStylistModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="stylistModalTitle">Nuevo estilista</h3>
+            <button class="close-modal-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <form id="addStylistForm">
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono:</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Usuario:</label>
+                    <input type="text" name="user" required>
+                </div>
+                <div class="form-group">
+                    <label>Servicios:</label>
+                    <input type="text" name="services" required>
+                </div>
+                <div class="form-group">
+                    <label>Horarios:</label>
+                    <input type="text" name="schedule" required>
+                </div>
+                <div class="form-group">
+                    <label>Ocupación:</label>
+                    <input type="text" name="occupation" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn primary">Agregar</button>
+                    <button type="button" class="btn secondary cancel-stylist">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
