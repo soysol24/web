@@ -1,0 +1,25 @@
+.history-table-container {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 2px solid var(--border-color-light);
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--text-color-light);
+}
+
+.history-table th {
+    padding: 15px 20px;
+    text-align: left;
+    font-weight: 700;
+    background-color: #F0F0F0;
+    border-bottom: 2px solid var(--border-color-light);
+}
+
+.history-table td {
+    padding: 15px 20px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-color-light);
+}

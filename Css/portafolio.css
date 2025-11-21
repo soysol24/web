@@ -1,0 +1,114 @@
+.portfolio-module h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: var(--text-color-dark);
+}
+
+.add-image-btn {
+    background-color: var(--accent-color);
+    color: var(--text-color-light);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    transition: all 0.2s ease;
+}
+
+.add-image-btn:hover {
+    background-color: var(--accent-color-darken);
+    transform: translateY(-2px);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.portfolio-slot {
+    background-color: #F8F8F8;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    position: relative;
+    border: 2px dashed var(--border-color-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.portfolio-slot:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 12px rgba(123, 104, 238, 0.2);
+}
+
+.portfolio-slot.has-image {
+    border: none;
+}
+
+.portfolio-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-btn {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.2s ease;
+}
+
+.upload-btn i {
+    font-size: 48px;
+}
+
+.upload-btn:hover {
+    color: var(--accent-color);
+}
+
+.delete-portfolio-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--error-red);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio-slot:hover .delete-portfolio-btn {
+    opacity: 1;
+}
+
+.delete-portfolio-btn:hover {
+    background-color: var(--error-red-darken);
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}

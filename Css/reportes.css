@@ -1,0 +1,30 @@
+/* ========================================== */
+/* SECCIÓN DE REPORTES */
+/* ========================================== */
+
+.reports-section {
+    background-color: var(--text-color-light);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.reports-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: var(--text-color-dark);
+}
+
+.reports-content {
+    padding: 20px;
+}
+
+.placeholder-text {
+    text-align: center;
+    font-size: 18px;
+    color: #999;
+    padding: 60px 20px;
+}
+

@@ -1,0 +1,119 @@
+/* ========================================== */
+/* SECCIÓN DE FORMULARIOS */
+/* ========================================== */
+
+.form-section {
+    background-color: var(--text-color-light);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: var(--text-color-dark);
+}
+
+.forms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-card {
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding: 25px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.form-card h3 {
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    color: var(--text-color-dark);
+}
+
+.form-questions-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.form-questions-list li {
+    padding: 8px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.form-question-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.form-question-item .form-group {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.remove-question-btn {
+    background-color: var(--error-red);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
+}
+
+.remove-question-btn:hover {
+    background-color: var(--error-red-darken);
+}
+
+.add-question-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.add-question-btn:hover {
+    background-color: var(--accent-color-darken);
+}
+
+.single-column-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
